@@ -1,8 +1,6 @@
 package com.ticketing.controller;
 
 import com.ticketing.dto.TaskDTO;
-import com.ticketing.service.ProjectService;
-import com.ticketing.service.TaskService;
 import com.ticketing.service.UserService;
 import com.ticketing.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
