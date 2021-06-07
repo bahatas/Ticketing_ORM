@@ -26,9 +26,7 @@ public class UserController {
 
         model.addAttribute("user",new UserDTO());
         model.addAttribute("roles",roleService.listAllRoles());
-        //model.addAttribute("users",userService.findAll());
-
-
+        model.addAttribute("users",userService.ListAllUSer());
 
         return "user/create";
     }
@@ -36,7 +34,7 @@ public class UserController {
     @PostMapping("/create")
     public String insertUser(UserDTO user,Model model){
 
-       // userService.save(user);
+        userService.save(user);
 //        model.addAttribute("user",new UserDTO());
 //        model.addAttribute("roles",roleService.findAll());
 //        model.addAttribute("users",userService.findAll());

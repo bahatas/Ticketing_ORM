@@ -1,7 +1,13 @@
 package com.ticketing.implementation;
 
 import com.ticketing.dto.UserDTO;
+import com.ticketing.entity.User;
+
+import com.ticketing.mapper.UserMapper;
+import com.ticketing.repository.UserRepository;
 import com.ticketing.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +17,22 @@ import java.util.stream.Collectors;
 public class UserServiceImpl  implements UserService {
 
 
+    UserRepository userRepository;
+
+
+    UserMapper userMapper;
+
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+    }
+
     @Override
     public List<UserDTO> ListAllUSer() {
-        return null;
+        List<User> list = userRepository.findAll(Sort.by("firstName"));
+
+        //convert entity to DTO
+        return list.stream().map(each->{return userMapper.convertToDto(each); }).collect(Collectors.toList());
     }
 
     @Override
@@ -21,9 +40,17 @@ public class UserServiceImpl  implements UserService {
         return null;
     }
 
-    @Override
-    public void save() {
 
+
+    @Override
+    public void save(UserDTO userDTO) {
+
+
+        //dto to entity
+       User user= userMapper.convertToEntity(userDTO);
+
+        //save with implemented method via Jpa
+        userRepository.save(user);
     }
 
     @Override
