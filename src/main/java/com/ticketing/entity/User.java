@@ -19,9 +19,9 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    private String firstname;
-    private String lastname;
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String userName;
     private String password;
     private boolean enabled;
     private String phone;

@@ -1,44 +1,36 @@
 package com.ticketing.implementation;
 
 import com.ticketing.dto.RoleDTO;
+import com.ticketing.entity.Role;
+import com.ticketing.mapper.RoleMapper;
+import com.ticketing.repository.RoleRepository;
 import com.ticketing.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl extends AbstractMapService<RoleDTO,Long> implements RoleService {
+public class RoleServiceImpl  implements RoleService {
 
-    @Override
-    public List<RoleDTO> findAll() {
-        return super.findAll();
+    private RoleRepository roleRepository;
+    private RoleMapper roleMapper;
+
+    public RoleServiceImpl(RoleRepository roleRepository, RoleMapper roleMapper) {
+        this.roleRepository = roleRepository;
+        this.roleMapper = roleMapper;
     }
 
     @Override
-    public RoleDTO findById(Long aLong) {
-        return null;
+    public List<RoleDTO> listAllRoles() {
+        List<Role> list =roleRepository.findAll();
+        return list.stream().map(each->{return  roleMapper.convertToDto(each);}).collect(Collectors.toList());
     }
 
     @Override
-    public RoleDTO save(RoleDTO object) {
-        return super.save(object.getId(),object);
+    public RoleDTO findById(Long id) {
+      Role role=roleRepository.findById(id).get();
+       return roleMapper.convertToDto(role) ;
     }
-
-    @Override
-    public void update(RoleDTO object) {
-        super.update(object.getId(),object);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
-
-    @Override
-    public void delete(RoleDTO object) {
-        super.delete(object);
-    }
-
-
-
 }
