@@ -10,11 +10,13 @@ import java.util.List;
 public interface UserService {
 
 
-    List<UserDTO> ListAllUSer();
+    List<UserDTO> listAllUser();
     UserDTO findByUserName(String username);
     void save(UserDTO userDTO);
-    UserDTO update(String username);
+    UserDTO update(UserDTO userDTO);
     void delete(String username);
+
+    void deleteByUserName(String username);
 
 
 
