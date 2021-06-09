@@ -32,7 +32,7 @@ public class ProjectServiceImp implements ProjectServise
     @Override
     public List<ProjectDTO> listAllProjects() {
         return projectRepository.findAll(Sort.by("projectCode"))
-                .stream().map(each-> projectMapper.conertToDto(each)).collect(Collectors.toList());
+                .stream().map(each->{return projectMapper.conertToDto(each);}).collect(Collectors.toList());
     }
 
     @Override
