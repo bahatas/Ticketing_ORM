@@ -6,6 +6,7 @@ import com.ticketing.mapper.ProjectMapper;
 import com.ticketing.repository.ProjectRepository;
 import com.ticketing.service.ProjectServise;
 import com.ticketing.utils.Status;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +31,8 @@ public class ProjectServiceImp implements ProjectServise
 
     @Override
     public List<ProjectDTO> listAllProjects() {
-        return projectRepository.findAll()
-                .stream().map(each->{return projectMapper.conertToDto(each);}).collect(Collectors.toList());
+        return projectRepository.findAll(Sort.by("projectCode"))
+                .stream().map(each-> projectMapper.conertToDto(each)).collect(Collectors.toList());
     }
 
     @Override
