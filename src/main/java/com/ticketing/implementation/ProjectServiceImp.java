@@ -9,6 +9,7 @@ import com.ticketing.utils.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectServiceImp implements ProjectServise
@@ -29,7 +30,8 @@ public class ProjectServiceImp implements ProjectServise
 
     @Override
     public List<ProjectDTO> listAllProjects() {
-        return null;
+        return projectRepository.findAll()
+                .stream().map(each->{return projectMapper.conertToDto(each);}).collect(Collectors.toList());
     }
 
     @Override
