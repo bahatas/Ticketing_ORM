@@ -1,6 +1,7 @@
 package com.ticketing.service;
 
 
+import com.ticketing.dto.RoleDTO;
 import com.ticketing.dto.UserDTO;
 import com.ticketing.entity.User;
 
@@ -17,6 +18,8 @@ public interface UserService {
     void delete(String username);
 
     void deleteByUserName(String username);
+
+    List<UserDTO> listAllByRole(String role);
 
 
 
