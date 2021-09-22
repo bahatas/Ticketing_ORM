@@ -6,9 +6,11 @@ import com.ticketing.entity.User;
 import com.ticketing.mapper.UserMapper;
 import com.ticketing.repository.UserRepository;
 import com.ticketing.service.UserService;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl  implements UserService {
 
 
+    @Autowired
     UserRepository userRepository;
 
 
@@ -29,7 +32,7 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public List<UserDTO> listAllUser() {
-        List<User> list = userRepository.findAll(Sort.by("firstName"));
+     var list = userRepository.findAll(Sort.by("firstName"));
 
         //convert entity to DTO
         return list.stream().map(each->{return userMapper.convertToDto(each); }).collect(Collectors.toList());

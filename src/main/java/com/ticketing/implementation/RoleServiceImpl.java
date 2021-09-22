@@ -5,6 +5,7 @@ import com.ticketing.entity.Role;
 import com.ticketing.mapper.RoleMapper;
 import com.ticketing.repository.RoleRepository;
 import com.ticketing.service.RoleService;
+import lombok.var;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,13 +25,13 @@ public class RoleServiceImpl  implements RoleService {
 
     @Override
     public List<RoleDTO> listAllRoles() {
-        List<Role> list =roleRepository.findAll();
+        var list =roleRepository.findAll();
         return list.stream().map(each->{return  roleMapper.convertToDto(each);}).collect(Collectors.toList());
     }
 
     @Override
     public RoleDTO findById(Long id) {
-      Role role=roleRepository.findById(id).get();
+      var role = roleRepository.findById(id).get();
        return roleMapper.convertToDto(role) ;
     }
 }
